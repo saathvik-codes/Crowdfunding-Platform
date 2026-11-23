@@ -182,6 +182,7 @@ function Home() {
           </div>
         ) : filteredCampaigns.length === 0 ? (
           <div className="text-center py-12">
+            <img src="/illustrations/cf-empty-projects.webp" alt="" width="180" height="120" className="mx-auto mb-4 h-auto w-[180px] invert opacity-80" />
             <p className="text-gray-300 text-lg">No campaigns found</p>
           </div>
         ) : (

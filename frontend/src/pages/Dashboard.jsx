@@ -120,7 +120,7 @@ function Dashboard() {
             </div>
           ) : campaigns.length === 0 ? ( 
             <div className="card p-12 text-center">
-              <TrendingUp className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <img src="/illustrations/cf-empty-projects.webp" alt="" width="180" height="120" className="mx-auto mb-4 h-auto w-[180px]" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 No campaigns yet
               </h3>

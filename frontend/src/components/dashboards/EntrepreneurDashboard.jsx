@@ -205,7 +205,8 @@ function EntrepreneurDashboard() {
               {campaigns.length === 0 ? (
                 <div className="text-center py-12">
                   <TrendingUp className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                  <p className="text-gray-400 mb-4">No campaigns yet</p>
+                  <img src="/illustrations/cf-empty-projects.webp" alt="" width="180" height="120" className="mx-auto mb-4 h-auto w-[180px] invert opacity-80" />
+            <p className="text-gray-400 mb-4">No campaigns yet</p>
                   <Link to="/create-campaign">
                     <motion.button
                       whileHover={{ scale: 1.05 }}

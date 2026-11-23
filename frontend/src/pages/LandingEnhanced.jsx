@@ -231,28 +231,12 @@ function LandingEnhanced() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-purple-600 rounded-3xl blur-3xl opacity-30 animate-pulse-slow"></div>
               <img
-                src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=600&fit=crop"
-                alt="Crowdfunding Success"
-                className="relative rounded-3xl shadow-2xl w-full h-auto border border-white/10"
+                src="/illustrations/cf-hero-seedling.webp"
+                alt="A seedling growing from a stack of coins while two hands water it"
+                width="800" height="457"
+                className="relative h-auto w-full rounded-2xl border border-white/10"
               />
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                className="absolute -bottom-6 -left-6 bg-gray-800/90 backdrop-blur-lg rounded-2xl shadow-xl p-6 max-w-xs border border-white/10"
-              >
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-white">$2.5M</div>
-                    <div className="text-sm text-gray-400">Raised This Month</div>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </div>
