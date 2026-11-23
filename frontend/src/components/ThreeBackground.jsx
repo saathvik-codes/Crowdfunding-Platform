@@ -141,7 +141,6 @@ function FloatingText({ position, children, size = 1, color = 'white' }) {
         lineHeight={1}
         letterSpacing={0.02}
         maxWidth={10}
-        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaq5N.woff"
       >
         {children}
         <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
