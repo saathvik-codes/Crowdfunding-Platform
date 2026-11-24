@@ -235,7 +235,7 @@ function LandingEnhanced() {
                 src="/illustrations/cf-hero-seedling.webp"
                 alt="A seedling growing from a stack of coins while two hands water it"
                 width="800" height="457"
-                className="relative h-auto w-full rounded-2xl border border-white/10"
+                className="relative h-auto w-full invert hue-rotate-180 opacity-90"
               />
             </motion.div>
           </div>
