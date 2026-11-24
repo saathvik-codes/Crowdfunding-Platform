@@ -160,7 +160,7 @@ function InvestorDashboard() {
 
               {backedCampaigns.length === 0 ? (
                 <div className="text-center py-12">
-                  <Heart className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+                  <div className="mx-auto mb-4 w-48 rounded-xl bg-[#f7f4ec] p-3"><img src="/illustrations/cf-empty-pledges.webp" alt="" width={240} height={171} loading="lazy" className="mx-auto h-auto w-40" /></div>
                   <p className="text-gray-400 mb-4">No backed campaigns yet</p>
                   <Link to="/">
                     <motion.button

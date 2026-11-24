@@ -140,7 +140,7 @@ function MyPledges() {
             </div>
           ) : pledges.length === 0 ? (
             <div className="text-center py-12 px-6">
-              <Heart className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+              <div className="mx-auto mb-4 w-48 rounded-xl bg-[#f7f4ec] p-3"><img src="/illustrations/cf-empty-pledges.webp" alt="" width={240} height={171} loading="lazy" className="mx-auto h-auto w-40" /></div>
               <h3 className="text-xl font-semibold text-white mb-2">
                 No pledges yet
               </h3>

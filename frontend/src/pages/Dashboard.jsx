@@ -202,7 +202,7 @@ function Dashboard() {
             </div>
           ) : !recentPledges || recentPledges.length === 0 ? (
             <div className="card p-12 text-center" data-aos="fade-up">
-              <Heart className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <div className="mx-auto mb-4 w-48 rounded-xl bg-[#f7f4ec] p-3"><img src="/illustrations/cf-empty-pledges.webp" alt="" width={240} height={171} loading="lazy" className="mx-auto h-auto w-40" /></div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 No pledges yet
               </h3>

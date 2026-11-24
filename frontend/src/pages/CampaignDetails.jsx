@@ -464,7 +464,7 @@ function CampaignDetails() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <Users className="mx-auto h-12 w-12 text-gray-600" />
+                    <div className="mx-auto mb-4 w-48 rounded-xl bg-[#f7f4ec] p-3"><img src="/illustrations/cf-empty-backers.webp" alt="" width={240} height={171} loading="lazy" className="mx-auto h-auto w-40" /></div>
                     <h3 className="mt-2 text-sm font-medium text-white">No backers yet</h3>
                     <p className="mt-1 text-sm text-gray-400">Be the first to support this campaign!</p>
                   </div>

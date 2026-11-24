@@ -4,6 +4,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login, clearError } from '../store/authSlice';
 import { Rocket, Mail, Lock, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
+import AuthCarousel from '../components/AuthCarousel';
+
+const art = (n) => `/illustrations/${n}.webp`;
+const SHARED_SLIDES = [
+  { src: art('cf-carousel-create'), caption: 'Start a campaign with a goal, a deadline and a short story.' },
+  { src: art('cf-carousel-back'), caption: 'Back the projects you care about, straight from your wallet.' },
+  { src: art('cf-carousel-wallet'), caption: 'Your wallet shows every pledge and refund in one place.' },
+];
+const SLIDES = {
+  login: [{ src: art('cf-auth-signin'), caption: 'Welcome back. See how your projects are growing.' }, ...SHARED_SLIDES],
+  register: [{ src: art('cf-auth-signup'), caption: 'Plant an idea and let people help it grow.' }, ...SHARED_SLIDES],
+};
+
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -37,7 +50,12 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-[#151915]">
+    <div className="min-h-screen bg-[#151915] lg:grid lg:h-screen lg:grid-cols-2 lg:overflow-hidden">
+      <aside className="hidden min-h-0 flex-col justify-between bg-[#f7f4ec] p-10 lg:flex">
+        <Link to="/landing" className="text-2xl font-semibold text-[#23201a]">FundStarter</Link>
+        <AuthCarousel slides={SLIDES.login} />
+      </aside>
+      <div className="relative flex min-h-screen items-center justify-center px-4 py-10 sm:px-6 lg:min-h-0 lg:overflow-y-auto">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         
@@ -165,6 +183,7 @@ function Login() {
           </div>
         </motion.div>
       </motion.div>
+      </div>
     </div>
   );
 }
