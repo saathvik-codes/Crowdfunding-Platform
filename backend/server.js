@@ -48,9 +48,7 @@ app.get('/health', (req, res) => {
 });
 
 // Test Routes
-const testRoutes = require('./routes/test');
 const testDashboardRoutes = require('./routes/testDashboard');
-app.use('/api/test', testRoutes);
 app.use('/api/test', testDashboardRoutes);
 
 // API Routes
