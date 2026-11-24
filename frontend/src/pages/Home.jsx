@@ -33,7 +33,7 @@ function Home() {
     <div className="min-h-screen relative">
       <ThreeBackground />
       {/* Hero Section */}
-      <div className="relative z-10 bg-gradient-to-r from-primary-600/20 to-purple-600/20 backdrop-blur-sm border-b border-white/10 text-white py-20">
+      <div className="relative z-10 border-b border-white/10 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -41,7 +41,7 @@ function Home() {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl font-bold mb-6"
             >
-              Bring Creative Projects to Life
+              Projects looking for backers
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ function Home() {
               transition={{ delay: 0.2 }}
               className="text-xl mb-8 text-gray-200 max-w-2xl mx-auto"
             >
-              Discover and support innovative campaigns. Help creators reach their goals and make dreams come true.
+              Search, filter and back a campaign from your wallet.
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -57,10 +57,10 @@ function Home() {
               transition={{ delay: 0.4 }}
               className="flex justify-center space-x-4"
             >
-              <Link to="/register" className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-3 rounded-xl font-semibold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg shadow-primary-500/30">
+              <Link to="/register" className="text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-sm shadow-primary-500/30 bg-primary-600">
                 Get Started
               </Link>
-              <Link to="/create-campaign" className="border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all">
+              <Link to="/create-campaign" className="border-2 border-white/30 bg-white/10 text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all">
                 Start a Campaign
               </Link>
             </motion.div>
@@ -69,7 +69,7 @@ function Home() {
       </div>
 
       {/* Stats Section */}
-      <div className="relative z-10 bg-white/5 backdrop-blur-lg py-12 border-b border-white/10">
+      <div className="relative z-10 bg-white/5 py-12 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <motion.div 
@@ -121,7 +121,7 @@ function Home() {
                 placeholder="Search campaigns..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 backdrop-blur-sm"
+                className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
 

@@ -102,7 +102,7 @@ function CampaignDetails() {
     if (campaign.status === 'successful') {
       return (
         <motion.span 
-          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-green-500/10 text-green-400 border border-green-500/20 backdrop-blur-sm"
+          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-green-500/10 text-green-400 border border-green-500/20"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
@@ -113,7 +113,7 @@ function CampaignDetails() {
     } else if (campaign.status === 'failed') {
       return (
         <motion.span 
-          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-red-500/10 text-red-400 border border-red-500/20 backdrop-blur-sm"
+          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-red-500/10 text-red-400 border border-red-500/20"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
@@ -124,7 +124,7 @@ function CampaignDetails() {
     } else if (campaign.is_expired) {
       return (
         <motion.span 
-          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 backdrop-blur-sm"
+          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
@@ -135,11 +135,11 @@ function CampaignDetails() {
     } else {
       return (
         <motion.span 
-          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 backdrop-blur-sm"
+          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+          <div className="w-2 h-2 rounded-full bg-blue-400"></div>
           <span>Active Campaign</span>
         </motion.span>
       );
@@ -239,7 +239,7 @@ function CampaignDetails() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Campaign Header */}
-            <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 overflow-hidden">
+            <div className="bg-gray-800 rounded-2xl shadow-sm border border-gray-700 overflow-hidden">
               <div className="p-6 md:p-8">
                 <div className="flex flex-col md:flex-row md:items-start space-y-6 md:space-y-0 md:space-x-8">
                   {/* Campaign Media */}
@@ -271,7 +271,7 @@ function CampaignDetails() {
                                 className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                                 onClick={() => openVideo(video_url)}
                               >
-                                <div className="w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all">
+                                <div className="w-16 h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all">
                                   <Play className="w-8 h-8 text-white" fill="currentColor" />
                                 </div>
                               </div>
@@ -302,7 +302,7 @@ function CampaignDetails() {
                               className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                               onClick={() => openVideo(video_url)}
                             >
-                              <div className="w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all">
+                              <div className="w-16 h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all">
                                 <Play className="w-8 h-8 text-white" fill="currentColor" />
                               </div>
                             </div>
@@ -310,7 +310,7 @@ function CampaignDetails() {
                         ) : (
                           // If no image or video, show placeholder
                           <div className="w-full h-full flex items-center justify-center bg-gray-800">
-                            <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-gray-500">
+                            <div className="w-full h-full flex items-center justify-center text-gray-500 bg-[#151915]">
                               <span className="text-sm">No media available</span>
                             </div>
                           </div>
@@ -397,7 +397,7 @@ function CampaignDetails() {
 
             {/* Backers List */}
             <motion.div 
-              className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden"
+              className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
@@ -482,7 +482,7 @@ function CampaignDetails() {
               transition={{ duration: 0.4, delay: 0.2 }}
             >
               {/* Funding Card */}
-              <div className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
                 <div className="p-6">
                   {/* Progress */}
                   <div className="mb-6">
@@ -501,7 +501,7 @@ function CampaignDetails() {
                     {/* Progress Bar */}
                     <div className="w-full bg-gray-700 rounded-full h-2.5 mb-4">
                       <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600"
+                        className="h-full rounded-full bg-primary-600"
                         initial={{ width: 0 }}
                         animate={{ width: `${progressPercentage}%` }}
                         transition={{ duration: 1, ease: "easeOut" }}
@@ -564,7 +564,7 @@ function CampaignDetails() {
                     {canPledge ? (
                       <motion.button
                         onClick={() => setShowPledgeModal(true)}
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                        className="w-full text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 bg-primary-600"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -580,7 +580,7 @@ function CampaignDetails() {
                     ) : !isAuthenticated ? (
                       <motion.button
                         onClick={() => navigate('/login')}
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200"
+                        className="w-full text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 bg-primary-600"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >

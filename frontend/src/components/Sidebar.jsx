@@ -81,7 +81,7 @@ function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-sm"
       >
         {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
@@ -97,8 +97,8 @@ function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 h-screen bg-gray-900/95 backdrop-blur-xl border-r border-white/10 z-40
-          transition-transform duration-300 ease-in-out
+          fixed top-0 left-0 h-screen bg-gray-900/95 border-r border-white/10 z-40
+ transition-transform duration-300 ease-in-out
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           w-64 flex flex-col
         `}
@@ -110,10 +110,10 @@ function Sidebar() {
             className="flex items-center space-x-2"
             onClick={() => setIsMobileOpen(false)}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center shadow-lg shadow-primary-500/50">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-sm shadow-primary-500/50 bg-primary-600">
               <Rocket className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">FundStarter</span>
+            <span className="text-xl font-bold text-white">FundStarter</span>
           </Link>
           {isAuthenticated && user?.role && (
             <div className="mt-3 px-3 py-1.5 bg-primary-500/20 border border-primary-500/30 rounded-lg">
@@ -139,7 +139,7 @@ function Sidebar() {
                   onClick={() => setIsMobileOpen(false)}
                   className={`
                     flex items-center space-x-3 px-4 py-3 rounded-lg
-                    transition-all duration-200 group
+ transition-all duration-200 group
                     ${active 
                       ? 'bg-primary-600 text-white font-medium shadow-lg shadow-primary-500/30' 
                       : 'text-gray-300 hover:bg-white/10 hover:text-white'
@@ -159,7 +159,7 @@ function Sidebar() {
           {isAuthenticated ? (
             <div className="space-y-2">
               <div className="flex items-center space-x-3 px-4 py-3 bg-white/5 rounded-lg border border-white/10">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-primary-600">
                   <span className="text-white font-bold text-sm">{user?.name?.charAt(0).toUpperCase()}</span>
                 </div>
                 <div className="flex-1 min-w-0">

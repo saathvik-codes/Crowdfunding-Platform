@@ -44,7 +44,7 @@ function CampaignCard({ campaign }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
           <span>Active</span>
         </motion.span>
       );
@@ -68,7 +68,7 @@ function CampaignCard({ campaign }) {
   return (
     <Link to={`/campaigns/${campaign.id}`}>
       <motion.div 
-        className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 h-full flex flex-col hover:border-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10"
+        className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-6 h-full flex flex-col hover:border-blue-500/30 transition-all duration-300 hover:shadow-blue-500/10"
         whileHover={{ y: -5 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ function CampaignCard({ campaign }) {
           </div>
           <div className="w-full bg-gray-700 rounded-full h-2">
             <motion.div
-              className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
+              className="h-2 rounded-full transition-all duration-500 bg-primary-600"
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(campaign.progress_percentage, 100)}%` }}
               transition={{ duration: 1, ease: "easeOut" }}

@@ -421,7 +421,7 @@ function AdminManagement() {
           className="mb-8"
         >
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-600">
               <Shield className="w-7 h-7 text-white" />
             </div>
             <div>
@@ -432,7 +432,7 @@ function AdminManagement() {
         </motion.div>
 
         {/* Tabs */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-2 mb-6 border border-white/20">
+        <div className="bg-white/10 rounded-2xl p-2 mb-6 border border-white/20">
           <div className="flex space-x-2">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -460,7 +460,7 @@ function AdminManagement() {
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 mb-6 border border-white/20">
+        <div className="bg-white/10 rounded-xl p-4 mb-6 border border-white/20">
           <div className="flex flex-col space-y-4">
             {/* Search Input */}
             <div className="flex items-center space-x-4">
@@ -491,7 +491,7 @@ function AdminManagement() {
                 
                 {/* Role Filter Dropdown Menu */}
                 {showRoleFilter && (
-                  <div className="absolute right-0 mt-1 w-64 bg-gray-800 rounded-lg shadow-xl z-50 border border-white/10 overflow-hidden">
+                  <div className="absolute right-0 mt-1 w-64 bg-gray-800 rounded-lg shadow-sm z-50 border border-white/10 overflow-hidden">
                     <div className="p-3 border-b border-white/10">
                       <div className="flex justify-between items-center">
                         <h3 className="font-medium text-white">Filter by Role</h3>
@@ -556,7 +556,7 @@ function AdminManagement() {
         </div>
 
         {/* Content */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden">
+        <div className="bg-white/10 rounded-2xl border border-white/20 overflow-hidden">
           {loading ? (
             <div className="p-12 text-center text-white">Loading...</div>
           ) : (
@@ -580,7 +580,7 @@ function AdminManagement() {
                         <tr key={user.id} className="hover:bg-white/5 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-primary-600">
                                 <span className="text-white font-bold text-sm">
                                   {user.name?.charAt(0).toUpperCase()}
                                 </span>

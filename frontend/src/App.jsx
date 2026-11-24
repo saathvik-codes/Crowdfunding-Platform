@@ -19,7 +19,7 @@ import 'aos/dist/aos.css';
 
 // Layout for authenticated users (with sidebar)
 const DashboardLayout = () => (
-  <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex">
+  <div className="min-h-screen flex bg-[#151915]">
     <Sidebar />
     <main className="flex-1 lg:ml-64">
       <Outlet />

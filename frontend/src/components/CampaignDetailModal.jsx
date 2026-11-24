@@ -25,15 +25,15 @@ function CampaignDetailModal({ campaign, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="bg-gray-900 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-white/10"
+          className="bg-gray-900 rounded-2xl shadow-sm max-w-5xl w-full max-h-[90vh] overflow-hidden border border-white/10"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-700 p-6 relative">
+          <div className="p-6 relative bg-primary-600">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
@@ -105,7 +105,7 @@ function CampaignDetailModal({ campaign, onClose }) {
                       initial={{ width: 0 }}
                       animate={{ width: `${Math.min(fundingPercentage, 100)}%` }}
                       transition={{ duration: 1 }}
-                      className="h-full bg-gradient-to-r from-primary-500 to-primary-600"
+                      className="h-full bg-primary-600"
                     />
                   </div>
 
@@ -143,7 +143,7 @@ function CampaignDetailModal({ campaign, onClose }) {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-gray-800/50 rounded-xl p-4 border border-white/10">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-600">
                         <Users className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -155,7 +155,7 @@ function CampaignDetailModal({ campaign, onClose }) {
 
                   <div className="bg-gray-800/50 rounded-xl p-4 border border-white/10">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-600">
                         <DollarSign className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -175,7 +175,7 @@ function CampaignDetailModal({ campaign, onClose }) {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-semibold flex items-center justify-center space-x-2"
+                    className="flex-1 py-3 text-white rounded-xl font-semibold flex items-center justify-center space-x-2 bg-primary-600"
                   >
                     <Edit className="w-5 h-5" />
                     <span>Edit Campaign</span>
@@ -223,7 +223,7 @@ function CampaignDetailModal({ campaign, onClose }) {
                       </div>
                       <button
                         onClick={handleSaveVideo}
-                        className="w-full py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all"
+                        className="w-full py-3 text-white rounded-lg font-semibold transition-all bg-primary-600"
                       >
                         Save Video URL
                       </button>

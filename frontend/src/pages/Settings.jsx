@@ -44,7 +44,7 @@ function Settings() {
           className="mb-8"
         >
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-primary-600">
               <SettingsIcon className="w-7 h-7 text-white" />
             </div>
             <div>
@@ -57,7 +57,7 @@ function Settings() {
         <div className="grid lg:grid-cols-4 gap-6">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <div className="bg-white/10 rounded-2xl p-4 border border-white/20">
               <div className="space-y-2">
                 {tabs.map((tab) => {
                   if (tab.adminOnly && user?.role !== 'admin') return null;
@@ -83,7 +83,7 @@ function Settings() {
 
           {/* Content */}
           <div className="lg:col-span-3">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+            <div className="bg-white/10 rounded-2xl p-6 border border-white/20">
               <form onSubmit={handleSubmit}>
                 {/* Profile Tab */}
                 {activeTab === 'profile' && (
@@ -280,7 +280,7 @@ function Settings() {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg shadow-primary-500/30 flex items-center space-x-2"
+                    className="px-6 py-3 text-white rounded-lg font-semibold transition-all shadow-sm shadow-primary-500/30 flex items-center space-x-2 bg-primary-600"
                   >
                     <Save className="w-5 h-5" />
                     <span>Save Changes</span>

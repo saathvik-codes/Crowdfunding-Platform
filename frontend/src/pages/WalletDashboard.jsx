@@ -132,10 +132,10 @@ function WalletDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 mb-6"
+          className="bg-white/10 rounded-2xl p-6 border border-white/20 mb-6"
         >
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary-600">
               <span className="text-white font-bold text-2xl">
                 {walletData?.user?.name?.charAt(0).toUpperCase()}
               </span>
@@ -176,7 +176,7 @@ function WalletDashboard() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="bg-gradient-to-br from-primary-600/30 to-primary-800/30 backdrop-blur-lg border border-primary-500/30 rounded-2xl p-8 mb-8 text-white shadow-2xl"
+          className="border border-primary-500/30 rounded-2xl p-8 mb-8 text-white shadow-sm"
         >
           <div className="flex justify-between items-start mb-6">
             <div>
@@ -187,7 +187,7 @@ function WalletDashboard() {
             </div>
             <button
               onClick={() => setShowAddFunds(true)}
-              className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg font-medium hover:bg-white/30 transition-colors flex items-center space-x-2 border border-white/20"
+              className="bg-white/20 text-white px-4 py-2 rounded-lg font-medium hover:bg-white/30 transition-colors flex items-center space-x-2 border border-white/20"
             >
               <Plus className="w-4 h-4" />
               <span>Add Funds</span>
@@ -222,7 +222,7 @@ function WalletDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-blue-500/10 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 mb-8"
+          className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6 mb-8"
         >
           <h3 className="text-xl font-bold text-blue-300 mb-3 flex items-center">
             <RefreshCw className="w-5 h-5 mr-2" />
@@ -234,19 +234,19 @@ function WalletDashboard() {
             fully or rolls back completely.
           </p>
           <div className="grid grid-cols-4 gap-3 text-sm">
-            <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
               <p className="font-semibold text-blue-300">Atomicity</p>
               <p className="text-gray-400 text-xs">All or nothing</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
               <p className="font-semibold text-blue-300">Consistency</p>
               <p className="text-gray-400 text-xs">Valid state</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
               <p className="font-semibold text-blue-300">Isolation</p>
               <p className="text-gray-400 text-xs">No interference</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
               <p className="font-semibold text-blue-300">Durability</p>
               <p className="text-gray-400 text-xs">Persists</p>
             </div>
@@ -258,7 +258,7 @@ function WalletDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden"
+          className="bg-white/10 rounded-2xl border border-white/20 overflow-hidden"
         >
           <div className="p-6 border-b border-white/10">
             <h3 className="text-xl font-bold text-white flex items-center justify-between">
@@ -325,7 +325,7 @@ function WalletDashboard() {
 
         {/* Add Funds Modal */}
         {showAddFunds && (
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -360,7 +360,7 @@ function WalletDashboard() {
                 <button
                   onClick={handleAddFunds}
                   disabled={!addAmount || parseFloat(addAmount) <= 0}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg shadow-primary-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-3 text-white rounded-lg font-semibold transition-all shadow-sm shadow-primary-500/30 disabled:opacity-50 disabled:cursor-not-allowed bg-primary-600"
                 >
                   Add Funds
                 </button>

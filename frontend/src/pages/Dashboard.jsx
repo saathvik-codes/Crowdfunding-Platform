@@ -135,7 +135,7 @@ function Dashboard() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {campaigns.map((campaign) => (
-                <div key={campaign.id} className="card overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div key={campaign.id} className="card overflow-hidden transition-shadow duration-300">
                   <Link to={`/campaigns/${campaign.id}`} className="block">
                     <div className="h-48 bg-gray-100 overflow-hidden">
                       {campaign.image_url ? (

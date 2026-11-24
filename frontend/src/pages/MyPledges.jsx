@@ -73,7 +73,7 @@ function MyPledges() {
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-300 text-sm font-medium">Total Pledges</span>
@@ -88,7 +88,7 @@ function MyPledges() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-300 text-sm font-medium">Total Amount</span>
@@ -103,7 +103,7 @@ function MyPledges() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-300 text-sm font-medium">Successful</span>
@@ -118,7 +118,7 @@ function MyPledges() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-300 text-sm font-medium">Active</span>
@@ -132,7 +132,7 @@ function MyPledges() {
         )}
 
         {/* Pledges List */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden">
+        <div className="bg-white/10 rounded-2xl border border-white/20 overflow-hidden">
           {loading ? (
             <div className="text-center py-12">
               <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary-600 border-t-transparent"></div>
@@ -147,7 +147,7 @@ function MyPledges() {
               <p className="text-gray-300 mb-6">
                 Start supporting amazing projects today!
               </p>
-              <Link to="/" className="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg shadow-primary-500/30 inline-block">
+              <Link to="/" className="px-6 py-3 text-white rounded-lg font-semibold transition-all shadow-sm shadow-primary-500/30 inline-block bg-primary-600">
                 Explore Campaigns
               </Link>
             </div>

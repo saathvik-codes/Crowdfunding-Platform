@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Rocket, TrendingUp, Shield, Users, Zap, Heart, Target, Award, ArrowRight, CheckCircle, Star, Sparkles } from 'lucide-react';
+import { Rocket, TrendingUp, Shield, Users, Zap, Heart, Target, Award, ArrowRight, CheckCircle, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThreeBackground from '../components/ThreeBackground';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { campaignsAPI } from '../services/api';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -18,35 +19,50 @@ function LandingEnhanced() {
   const features = [
     {
       icon: Shield,
-      title: 'Secure Transactions',
-      description: 'ACID-compliant database ensures your funds are always safe with atomic transactions.',
+      title: 'Pledges you can trust',
+      description: 'Every pledge is written in a single database transaction, so money is never counted twice.',
       gradient: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Zap,
-      title: 'Instant Processing',
-      description: 'Real-time pledge processing with automated deadline management and fund release.',
+      title: 'Deadlines handled for you',
+      description: 'When a campaign ends, its pledges are released or returned automatically.',
       gradient: 'from-purple-500 to-pink-500'
     },
     {
       icon: Users,
-      title: 'Role-Based Access',
-      description: 'Specialized dashboards for Admins, Entrepreneurs, and Investors with unique features.',
+      title: 'A view for each role',
+      description: 'Creators, backers and admins each get their own dashboard.',
       gradient: 'from-orange-500 to-red-500'
     },
     {
       icon: Target,
-      title: 'Advanced Analytics',
-      description: 'Comprehensive analytics and predictive models to track campaign success rates.',
+      title: 'Campaign numbers',
+      description: 'Pledges, backers and progress for every campaign, updated as they come in.',
       gradient: 'from-green-500 to-emerald-500'
     }
   ];
 
+  const [live, setLive] = useState(null);
+  useEffect(() => {
+    campaignsAPI.getAll()
+      .then(({ data }) => {
+        const list = Array.isArray(data) ? data : data.campaigns || data.data || [];
+        setLive({
+          campaigns: list.length,
+          raised: list.reduce((sum, c) => sum + Number(c.total_pledged || 0), 0),
+          backers: list.reduce((sum, c) => sum + Number(c.backers_count || 0), 0),
+          funded: list.filter((c) => Number(c.total_pledged || 0) >= Number(c.goal_amount || c.goal || Infinity)).length,
+        });
+      })
+      .catch(() => setLive(null));
+  }, []);
+  const show = (n, money) => (live ? (money ? '$' : '') + Math.round(n).toLocaleString() : '-');
   const stats = [
-    { value: '10K+', label: 'Active Users', icon: Users },
-    { value: '$5M+', label: 'Funds Raised', icon: TrendingUp },
-    { value: '500+', label: 'Successful Projects', icon: Award },
-    { value: '95%', label: 'Success Rate', icon: Star }
+    { value: show(live?.campaigns), label: 'Campaigns', icon: Rocket },
+    { value: show(live?.raised, true), label: 'Pledged so far', icon: TrendingUp },
+    { value: show(live?.backers), label: 'Backers', icon: Users },
+    { value: show(live?.funded), label: 'Fully funded', icon: Award }
   ];
 
   const campaigns = [
@@ -80,28 +96,28 @@ function LandingEnhanced() {
     {
       title: 'For Investors',
       icon: TrendingUp,
-      description: 'Discover and back innovative projects. Track your investments with real-time analytics.',
+      description: 'Find projects you care about, back them from your wallet and follow their progress.',
       features: ['Portfolio Dashboard', 'Investment Analytics', 'Real-time Updates', 'Secure Wallet'],
       color: 'from-blue-500 to-cyan-500'
     },
     {
       title: 'For Entrepreneurs',
       icon: Rocket,
-      description: 'Launch your campaign and reach thousands of potential backers worldwide.',
-      features: ['Campaign Management', 'Backer Analytics', 'Fund Tracking', 'Marketing Tools'],
+      description: 'Set up a campaign, share the link and see who backs it.',
+      features: ['Campaign Management', 'Backer Analytics', 'Fund Tracking', 'Campaign page'],
       color: 'from-purple-500 to-pink-500'
     },
     {
       title: 'For Admins',
       icon: Shield,
-      description: 'Manage the platform with comprehensive tools and oversight capabilities.',
-      features: ['User Management', 'Platform Analytics', 'Audit Logs', 'Performance Metrics'],
+      description: 'Review campaigns and users, and keep the platform tidy.',
+      features: ['User Management', 'Platform Analytics', 'Audit Logs', 'Platform numbers'],
       color: 'from-orange-500 to-red-500'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-[#151915]">
       {/* Three.js Background */}
       <ThreeBackground />
 
@@ -110,7 +126,7 @@ function LandingEnhanced() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 bg-gray-900/80 backdrop-blur-lg border-b border-white/10 z-50"
+        className="fixed top-0 left-0 right-0 bg-gray-900/80 border-b border-white/10 z-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -118,10 +134,10 @@ function LandingEnhanced() {
               className="flex items-center space-x-2"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center shadow-lg shadow-primary-500/50">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-sm shadow-primary-500/50 bg-primary-600">
                 <Rocket className="w-6 h-6 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-white">
                 FundStarter
               </span>
             </motion.div>
@@ -136,7 +152,7 @@ function LandingEnhanced() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/register"
-                  className="px-6 py-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg shadow-primary-500/30 font-medium"
+                  className="px-6 py-2 text-white rounded-lg transition-all shadow-sm shadow-primary-500/30 font-medium bg-primary-600"
                 >
                   Sign Up
                 </Link>
@@ -151,17 +167,6 @@ function LandingEnhanced() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 relative z-10">
-              <motion.div 
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                className="inline-flex items-center space-x-2 bg-primary-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-500/30"
-              >
-                <Sparkles className="w-4 h-4 text-primary-400" />
-                <span className="text-sm font-medium text-primary-300">
-                  #1 DBMS-Powered Crowdfunding Platform
-                </span>
-              </motion.div>
               
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
@@ -169,10 +174,8 @@ function LandingEnhanced() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-5xl lg:text-7xl font-bold text-white leading-tight"
               >
-                Turn Your
-                <span className="block bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse-slow">
-                  Dreams Into Reality
-                </span>
+                Fund small projects,
+                <span className="block text-white">together.</span>
               </motion.h1>
               
               <motion.p 
@@ -181,8 +184,7 @@ function LandingEnhanced() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-xl text-gray-300 leading-relaxed"
               >
-                Join the world's most advanced crowdfunding platform. Powered by cutting-edge DBMS technology 
-                with role-based access, real-time analytics, and secure ACID-compliant transactions.
+                Start a campaign, share it and follow every pledge in one place. Backers pay from a wallet, and creators can see exactly who backed them.
               </motion.p>
               
               <motion.div 
@@ -194,7 +196,7 @@ function LandingEnhanced() {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     to="/register"
-                    className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-xl shadow-primary-500/30 font-semibold text-lg group"
+                    className="inline-flex items-center justify-center px-8 py-4 text-white rounded-xl transition-all shadow-sm shadow-primary-500/30 font-semibold text-lg group bg-primary-600"
                   >
                     Start Your Campaign
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -203,7 +205,7 @@ function LandingEnhanced() {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     to="/register"
-                    className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all shadow-lg border border-white/20 font-semibold text-lg"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white rounded-xl hover:bg-white/20 transition-all shadow-sm border border-white/20 font-semibold text-lg"
                   >
                     Explore Projects
                   </Link>
@@ -243,7 +245,7 @@ function LandingEnhanced() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-primary-600/20 to-purple-600/20 backdrop-blur-sm border-y border-white/10">
+      <section className="py-16 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -258,7 +260,7 @@ function LandingEnhanced() {
                   className="text-center group"
                 >
                   <div className="flex justify-center mb-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-purple-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform bg-primary-600">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
@@ -278,10 +280,10 @@ function LandingEnhanced() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-              Built for Every Role
+              One platform, three roles
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Specialized features and dashboards tailored for Investors, Entrepreneurs, and Admins
+              What each kind of account can do
             </p>
           </div>
 
@@ -296,9 +298,9 @@ function LandingEnhanced() {
                   transition={{ delay: index * 0.2 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -10 }}
-                  className="bg-gray-800/50 backdrop-blur-lg rounded-2xl p-8 border border-white/10 hover:border-primary-500/50 transition-all group"
+                  className="bg-gray-800/50 rounded-2xl p-8 border border-white/10 hover:border-primary-500/50 transition-all group"
                 >
-                  <div className={`w-16 h-16 bg-gradient-to-br ${role.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-16 h-16 bg-primary-600 ${role.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-3">
@@ -327,10 +329,10 @@ function LandingEnhanced() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-              Advanced DBMS Features
+              Under the hood
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Built with cutting-edge database management technology for security, performance, and reliability
+              A relational database with transactions, views and triggers keeps the numbers consistent
             </p>
           </div>
 
@@ -345,9 +347,9 @@ function LandingEnhanced() {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-gray-800/50 backdrop-blur-lg rounded-2xl p-8 border border-white/10 hover:border-primary-500/50 transition-all group"
+                  className="bg-gray-800/50 rounded-2xl p-8 border border-white/10 hover:border-primary-500/50 transition-all group"
                 >
-                  <div className={`w-14 h-14 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-14 h-14 bg-primary-600 ${feature.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                     <Icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">
@@ -370,19 +372,19 @@ function LandingEnhanced() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-primary-600/20 to-purple-600/20 backdrop-blur-lg rounded-3xl p-12 border border-white/10"
+            className="rounded-3xl p-12 border border-white/10"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Make Your Dream a Reality?
+              Have an idea worth funding?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Join thousands of creators who have successfully funded their projects on FundStarter
+              Setting up a campaign takes a few minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/register"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-xl shadow-primary-500/30 font-semibold text-lg group"
+                  className="inline-flex items-center justify-center px-8 py-4 text-white rounded-xl transition-all shadow-sm shadow-primary-500/30 font-semibold text-lg group bg-primary-600"
                 >
                   Get Started Now
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -394,18 +396,18 @@ function LandingEnhanced() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900/80 backdrop-blur-lg border-t border-white/10 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-gray-900/80 border-t border-white/10 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-primary-600">
                   <Rocket className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-xl font-bold text-white">FundStarter</span>
               </div>
               <p className="text-sm text-gray-400">
-                Empowering creators with advanced DBMS technology and role-based features.
+                Crowdfunding for small projects.
               </p>
             </div>
             <div>

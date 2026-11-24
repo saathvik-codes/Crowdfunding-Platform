@@ -100,7 +100,7 @@ function InvestorDashboard() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-semibold shadow-lg shadow-primary-500/30 flex items-center space-x-2"
+                className="px-6 py-3 text-white rounded-xl font-semibold shadow-sm shadow-primary-500/30 flex items-center space-x-2 bg-primary-600"
               >
                 <Sparkles className="w-5 h-5" />
                 <span>Discover Campaigns</span>
@@ -120,10 +120,10 @@ function InvestorDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-primary-500/50 transition-all"
+                className="bg-white/10 rounded-2xl p-6 border border-white/20 hover:border-primary-500/50 transition-all"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center`}>
+                  <div className={`w-12 h-12 bg-primary-600 ${stat.color} rounded-xl flex items-center justify-center`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-green-400 text-sm font-semibold flex items-center">
@@ -146,7 +146,7 @@ function InvestorDashboard() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-white flex items-center">
@@ -213,7 +213,7 @@ function InvestorDashboard() {
                             initial={{ width: 0 }}
                             animate={{ width: `${Math.min((campaign.current_funds / campaign.goal_amount) * 100, 100)}%` }}
                             transition={{ duration: 1, delay: index * 0.1 }}
-                            className="h-full bg-gradient-to-r from-primary-500 to-primary-600"
+                            className="h-full bg-primary-600"
                           />
                         </div>
                       </div>
@@ -252,7 +252,7 @@ function InvestorDashboard() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <BarChart3 className="w-6 h-6 mr-2 text-blue-400" />
@@ -308,7 +308,7 @@ function InvestorDashboard() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <h2 className="text-xl font-bold text-white mb-4 flex items-center">
                 <Bell className="w-5 h-5 mr-2 text-yellow-400" />
@@ -354,7 +354,7 @@ function InvestorDashboard() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <h2 className="text-xl font-bold text-white mb-4 flex items-center">
                 <Sparkles className="w-5 h-5 mr-2 text-primary-400" />
@@ -398,7 +398,7 @@ function InvestorDashboard() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+              className="bg-white/10 rounded-2xl p-6 border border-white/20"
             >
               <h2 className="text-xl font-bold text-white mb-4 flex items-center">
                 <Target className="w-5 h-5 mr-2 text-green-400" />

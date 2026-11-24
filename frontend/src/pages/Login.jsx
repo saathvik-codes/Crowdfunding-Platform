@@ -37,12 +37,12 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-[#151915]">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        
+        
+        
       </div>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ function Login() {
             transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
             className="flex justify-center mb-4"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/50">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm shadow-primary-500/50 bg-primary-600">
               <Rocket className="w-9 h-9 text-white" />
             </div>
           </motion.div>
@@ -94,7 +94,7 @@ function Login() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20"
+          className="bg-white/10 rounded-2xl p-8 shadow-sm border border-white/20"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
@@ -148,7 +148,7 @@ function Login() {
               disabled={loading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full py-3 px-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg shadow-primary-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 px-4 text-white rounded-lg font-semibold transition-all shadow-sm shadow-primary-500/50 disabled:opacity-50 disabled:cursor-not-allowed bg-primary-600"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </motion.button>

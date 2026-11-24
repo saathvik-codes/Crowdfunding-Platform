@@ -19,7 +19,7 @@ function EnhancedDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#151915]">
         <ThreeBackground />
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -48,7 +48,7 @@ function EnhancedDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative">
+    <div className="min-h-screen relative bg-[#151915]">
       <ThreeBackground />
       <div className="relative z-10">
         {renderDashboard()}
