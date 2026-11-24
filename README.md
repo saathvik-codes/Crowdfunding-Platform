@@ -1,19 +1,19 @@
-# 🚀 Enhanced Crowdfunding Platform - Advanced DBMS Project
+# Enhanced Crowdfunding Platform - Advanced DBMS Project
 
 A professional, feature-rich crowdfunding platform demonstrating advanced Database Management System concepts with **role-based authentication**, **Three.js 3D animations**, and **enterprise-level features**.
 
-## 🌟 What's New in Enhanced Version
+## What's New in Enhanced Version
 
-- ✅ **Role-Based Authentication** - Admin, Entrepreneur, and Investor roles
-- ✅ **Three.js 3D Animations** - Stunning visual effects and particle systems
-- ✅ **Framer Motion** - Smooth page transitions and interactions
-- ✅ **Glassmorphism UI** - Modern dark theme with blur effects
-- ✅ **Role-Specific Dashboards** - Unique features for each user type
-- ✅ **Advanced Notifications** - Real-time alerts and activity tracking
-- ✅ **Enhanced Security** - Permission-based access control
-- ✅ **Performance Metrics** - Platform monitoring and analytics
+- **Role-Based Authentication** - Admin, Entrepreneur, and Investor roles
+- **Three.js 3D Animations** - Stunning visual effects and particle systems
+- **Framer Motion** - Smooth page transitions and interactions
+- **Glassmorphism UI** - Modern dark theme with blur effects
+- **Role-Specific Dashboards** - Unique features for each user type
+- **Advanced Notifications** - Real-time alerts and activity tracking
+- **Enhanced Security** - Permission-based access control
+- **Performance Metrics** - Platform monitoring and analytics
 
-## 📋 Table of Contents
+## Table of Contents
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Advanced DBMS Features](#advanced-dbms-features)
@@ -21,45 +21,45 @@ A professional, feature-rich crowdfunding platform demonstrating advanced Databa
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 
-## ✨ Features
+## Features
 
 ### Role-Based Features
 
-#### 👨‍💼 Admin Features
-- 🛡️ Full platform access and control
-- 👥 User management and verification
-- 📊 Platform-wide analytics and statistics
-- 📝 Activity monitoring and audit logs
-- ⚡ Performance metrics tracking
-- 🔍 Campaign oversight and approval
+#### Admin Features
+- Full platform access and control
+- User management and verification
+- Platform-wide analytics and statistics
+- Activity monitoring and audit logs
+- Performance metrics tracking
+- Campaign oversight and approval
 
-#### 🚀 Entrepreneur Features
-- 🎯 Create and manage campaigns
-- 📈 Backer analytics and insights
-- 💰 Fund tracking and release history
-- 📢 Campaign updates and announcements
-- 🔔 Real-time pledge notifications
-- 📊 Performance charts (30-day trends)
+#### Entrepreneur Features
+- Create and manage campaigns
+- Backer analytics and insights
+- Fund tracking and release history
+- Campaign updates and announcements
+- Real-time pledge notifications
+- Performance charts (30-day trends)
 
-#### 💰 Investor Features
-- 🔍 Browse and discover campaigns
-- 💳 Pledge to campaigns with wallet
-- 📊 Portfolio tracking and analytics
-- 💵 Wallet management and transactions
-- 📜 Investment history and trends
-- 🎯 Personalized campaign recommendations
+#### Investor Features
+- Browse and discover campaigns
+- Pledge to campaigns with wallet
+- Portfolio tracking and analytics
+- Wallet management and transactions
+- Investment history and trends
+- Personalized campaign recommendations
 
 ### Core Features
-- 🔐 Role-based authentication (Admin/Entrepreneur/Investor)
-- 💰 Secure wallet system with ACID transactions
-- 📊 Real-time analytics and dashboards
-- 🔔 Notification system with activity tracking
-- 📜 Complete audit trail and logging
-- 🎨 3D animations with Three.js
-- ✨ Smooth transitions with Framer Motion
-- 🌙 Modern glassmorphism UI design
+- Role-based authentication (Admin/Entrepreneur/Investor)
+- Secure wallet system with ACID transactions
+- Real-time analytics and dashboards
+- Notification system with activity tracking
+- Complete audit trail and logging
+- 3D animations with Three.js
+- Smooth transitions with Framer Motion
+- Modern glassmorphism UI design
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **React** - UI framework
@@ -83,7 +83,7 @@ A professional, feature-rich crowdfunding platform demonstrating advanced Databa
 - **bcryptjs** - Password hashing
 - **node-cron** - Scheduled tasks
 
-## 🎓 Advanced DBMS Features
+## Advanced DBMS Features
 
 ### 1. ACID Transactions
 - **Atomicity**: All pledge operations complete or rollback entirely
@@ -176,7 +176,7 @@ const successProbability = calculateSuccessScore({
 });
 ```
 
-## ⚡ Quick Start
+## Quick Start
 
 ```bash
 # 1. Install dependencies
@@ -195,11 +195,11 @@ cd frontend && npm run dev
 
 **Default Admin:** admin@fundstarter.com / admin123
 
-📚 **For detailed setup:** See [SETUP_GUIDE.md](SETUP_GUIDE.md)
+**For detailed setup:** See [SETUP_GUIDE.md](SETUP_GUIDE.md)
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 - Node.js (v14 or higher)
@@ -226,7 +226,7 @@ cd backend
 node migrate-database.js
 ```
 
-## 🚀 Usage
+## Usage
 
 1. **Start Backend** (Port 5000)
 ```bash
@@ -249,7 +249,7 @@ npm run dev
 - Password: password123
 - Initial Wallet Balance: $1,000
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 crowdfunding/
@@ -271,7 +271,7 @@ crowdfunding/
 └── README.md
 ```
 
-## 🎯 Key API Endpoints
+## Key API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
@@ -298,7 +298,7 @@ crowdfunding/
 - `GET /api/analytics/success-rates` - Success rates
 - `GET /api/analytics/pledge-stats` - Pledge statistics
 
-## 🎓 Database Schema
+## Database Schema
 
 ### Users
 ```sql
@@ -359,21 +359,21 @@ CREATE TABLE wallet_transactions (
 );
 ```
 
-## 🔒 Security Features
+## Security Features
 - JWT-based authentication
 - Password hashing with bcrypt
 - SQL injection prevention with parameterized queries
 - CORS configuration
 - Input validation and sanitization
 
-## 📊 Analytics & Reporting
+## Analytics & Reporting
 - Real-time platform statistics
 - Campaign success prediction
 - User engagement metrics
 - Funding trend analysis
 - Audit trail for all transactions
 
-## 📚 Documentation
+## Documentation
 
 ### Comprehensive Guides
 - **[QUICK_START.md](QUICK_START.md)** - Get running in 5 minutes
@@ -390,17 +390,17 @@ CREATE TABLE wallet_transactions (
 - Performance optimization
 - Troubleshooting guide
 
-## 🤝 Contributing
+## Contributing
 This is an academic project demonstrating DBMS concepts. Feel free to fork and enhance!
 
-## 📄 License
+## License
 MIT License
 
-## 👨‍💻 Author
+## Author
 **Sunny**
 - GitHub: [@sunny18-max](https://github.com/sunny18-max)
 
-## 🎉 Acknowledgments
+## Acknowledgments
 Built as a demonstration of advanced Database Management System concepts including:
 - ACID transactions
 - Database triggers
@@ -412,4 +412,4 @@ Built as a demonstration of advanced Database Management System concepts includi
 
 ---
 
-**⭐ If you found this project helpful, please give it a star!**
+**If you found this project helpful, please give it a star!**
