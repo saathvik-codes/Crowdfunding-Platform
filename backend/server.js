@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
-const { startDeadlineChecker } = require('./services/deadlineChecker');
+const { startDeadlineChecker, processExpiredCampaigns } = require('./services/deadlineChecker');
 
 // Initialize database (this will create tables with wallet support)
 require('./database/db');
@@ -33,6 +33,17 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Expired campaigns are settled by a daily cron call and, between calls, whenever campaigns are listed (throttled)
+let lastSweep = 0;
+const sweep = () => { if (Date.now() - lastSweep > 60000) { lastSweep = Date.now(); processExpiredCampaigns().catch(() => {}); } };
+app.get('/api/cron/deadlines', async (req, res) => {
+  if (!process.env.CRON_SECRET || req.header('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) return res.status(401).json({ error: 'Unauthorized' });
+  await processExpiredCampaigns();
+  res.json({ ok: true });
+});
+app.use('/api/campaigns', (req, res, next) => { if (req.method === 'GET' && process.env.VERCEL) sweep(); next(); });
+
+
 
 // Request logging
 app.use((req, res, next) => {
@@ -72,19 +83,15 @@ app.use((req, res) => {
 // Error handling middleware
 app.use(errorHandler);
 
-// Start server
-app.listen(PORT, () => {
-  console.log('\n🚀 ================================');
-  console.log(`   Crowdfunding API Server`);
-  console.log('   ================================');
-  console.log(`   🌐 Server running on port ${PORT}`);
-  console.log(`   📍 http://localhost:${PORT}`);
-  console.log(`   🏥 Health check: http://localhost:${PORT}/health`);
-  console.log('   ================================\n');
+module.exports = app;
 
-  // Start the deadline checker cron job
-  startDeadlineChecker();
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Crowdfunding API listening on http://localhost:${PORT}`);
+    startDeadlineChecker();
+  });
+}
+
 
 // Graceful shutdown
 process.on('SIGINT', () => {
