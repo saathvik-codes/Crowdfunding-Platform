@@ -84,3 +84,6 @@
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out;
 }
+
+body { font-family: 'DM Sans', system-ui, sans-serif; }
+h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; letter-spacing: -0.02em; }

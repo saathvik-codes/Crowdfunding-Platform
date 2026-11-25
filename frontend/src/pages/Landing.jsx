@@ -434,7 +434,7 @@ function Landing() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 FundStarter. All rights reserved. Built with ❤️ for creators.</p>
+            <p>FundStarter</p>
           </div>
         </div>
       </footer>

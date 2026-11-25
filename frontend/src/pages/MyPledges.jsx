@@ -45,7 +45,7 @@ function MyPledges() {
 
   const getTransactionStatus = (status) => {
     if (status === 'committed') {
-      return <span className="text-green-600 text-sm font-medium">✓ Committed</span>;
+      return <span className="text-green-600 text-sm font-medium">Committed</span>;
     } else if (status === 'rolled_back') {
       return <span className="text-red-600 text-sm font-medium">↩ Refunded</span>;
     } else {
@@ -239,7 +239,7 @@ function MyPledges() {
             <h4 className="font-semibold text-blue-300 mb-2">Understanding Transaction Status</h4>
             <div className="space-y-2 text-sm text-gray-300">
               <p><strong>⏳ Pending:</strong> Campaign is still active. Your pledge is held until the deadline.</p>
-              <p><strong>✓ Committed:</strong> Campaign reached its goal! Your pledge has been transferred to the creator.</p>
+              <p><strong>Committed:</strong> Campaign reached its goal! Your pledge has been transferred to the creator.</p>
               <p><strong>↩ Refunded:</strong> Campaign didn't reach its goal. Your pledge has been refunded.</p>
             </div>
           </div>

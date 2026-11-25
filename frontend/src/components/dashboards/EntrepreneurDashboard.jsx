@@ -100,29 +100,25 @@ function EntrepreneurDashboard() {
       title: 'Total Campaigns',
       value: stats.total_campaigns || 0,
       icon: TrendingUp,
-      color: 'from-blue-500 to-cyan-500',
-      change: '+12%'
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       title: 'Active Campaigns',
       value: stats.active_campaigns || 0,
       icon: Zap,
-      color: 'from-purple-500 to-pink-500',
-      change: '+5%'
+      color: 'from-purple-500 to-pink-500'
     },
     {
       title: 'Total Raised',
       value: `$${(stats.total_raised || 0).toLocaleString()}`,
       icon: DollarSign,
-      color: 'from-green-500 to-emerald-500',
-      change: '+23%'
+      color: 'from-green-500 to-emerald-500'
     },
     {
       title: 'Total Backers',
       value: stats.total_backers || 0,
       icon: Users,
-      color: 'from-orange-500 to-red-500',
-      change: '+18%'
+      color: 'from-orange-500 to-red-500'
     }
   ];
 
@@ -138,7 +134,7 @@ function EntrepreneurDashboard() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2">
-                Welcome back, {user?.name}! 🚀
+                Welcome back, {user?.name}
               </h1>
               <p className="text-gray-300 text-lg">
                 Manage your campaigns and track your success
@@ -174,7 +170,7 @@ function EntrepreneurDashboard() {
                   <div className={`w-12 h-12 bg-primary-600 ${stat.color} rounded-xl flex items-center justify-center`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-green-400 text-sm font-semibold">{stat.change}</span>
+                  {stat.change && <span className="text-green-400 text-sm font-semibold">{stat.change}</span>}
                 </div>
                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
                 <div className="text-gray-400 text-sm">{stat.title}</div>

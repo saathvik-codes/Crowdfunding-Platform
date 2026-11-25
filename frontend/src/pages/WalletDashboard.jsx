@@ -162,10 +162,10 @@ function WalletDashboard() {
           {(walletData?.user?.location || walletData?.user?.phone) && (
             <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-400">
               {walletData?.user?.location && (
-                <span>📍 {walletData.user.location}</span>
+                <span>{walletData.user.location}</span>
               )}
               {walletData?.user?.phone && (
-                <span>📞 {walletData.user.phone}</span>
+                <span>{walletData.user.phone}</span>
               )}
             </div>
           )}
@@ -218,40 +218,7 @@ function WalletDashboard() {
         </motion.div>
 
         {/* ACID Transaction Demo */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6 mb-8"
-        >
-          <h3 className="text-xl font-bold text-blue-300 mb-3 flex items-center">
-            <RefreshCw className="w-5 h-5 mr-2" />
-            ACID Transaction Demonstration
-          </h3>
-          <p className="text-gray-300 text-sm mb-4">
-            All wallet operations use ACID transactions: <strong>Atomicity</strong>, <strong>Consistency</strong>, 
-            <strong>Isolation</strong>, and <strong>Durability</strong>. Every pledge operation either completes 
-            fully or rolls back completely.
-          </p>
-          <div className="grid grid-cols-4 gap-3 text-sm">
-            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
-              <p className="font-semibold text-blue-300">Atomicity</p>
-              <p className="text-gray-400 text-xs">All or nothing</p>
-            </div>
-            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
-              <p className="font-semibold text-blue-300">Consistency</p>
-              <p className="text-gray-400 text-xs">Valid state</p>
-            </div>
-            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
-              <p className="font-semibold text-blue-300">Isolation</p>
-              <p className="text-gray-400 text-xs">No interference</p>
-            </div>
-            <div className="bg-white/10 p-3 rounded-lg border border-white/10">
-              <p className="font-semibold text-blue-300">Durability</p>
-              <p className="text-gray-400 text-xs">Persists</p>
-            </div>
-          </div>
-        </motion.div>
+        
 
         {/* Transaction History */}
         <motion.div 

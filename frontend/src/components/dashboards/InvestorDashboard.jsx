@@ -52,29 +52,25 @@ function InvestorDashboard() {
       title: 'Wallet Balance',
       value: `$${(stats.wallet_balance || 0).toLocaleString()}`,
       icon: Wallet,
-      color: 'from-blue-500 to-cyan-500',
-      change: '+$500'
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       title: 'Total Invested',
       value: `$${(stats.total_invested || 0).toLocaleString()}`,
       icon: DollarSign,
-      color: 'from-green-500 to-emerald-500',
-      change: '+15%'
+      color: 'from-green-500 to-emerald-500'
     },
     {
       title: 'Campaigns Backed',
       value: stats.campaigns_backed || 0,
       icon: Heart,
-      color: 'from-pink-500 to-rose-500',
-      change: '+3'
+      color: 'from-pink-500 to-rose-500'
     },
     {
       title: 'Avg. Pledge',
       value: `$${Math.round(stats.avg_pledge_amount || 0)}`,
       icon: TrendingUp,
-      color: 'from-purple-500 to-indigo-500',
-      change: '+8%'
+      color: 'from-purple-500 to-indigo-500'
     }
   ];
 
@@ -90,7 +86,7 @@ function InvestorDashboard() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2">
-                Welcome, {user?.name}! 💰
+                Welcome, {user?.name}
               </h1>
               <p className="text-gray-300 text-lg">
                 Track your investments and discover new opportunities
@@ -126,10 +122,6 @@ function InvestorDashboard() {
                   <div className={`w-12 h-12 bg-primary-600 ${stat.color} rounded-xl flex items-center justify-center`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-green-400 text-sm font-semibold flex items-center">
-                    <ArrowUpRight className="w-4 h-4 mr-1" />
-                    {stat.change}
-                  </span>
                 </div>
                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
                 <div className="text-gray-400 text-sm">{stat.title}</div>

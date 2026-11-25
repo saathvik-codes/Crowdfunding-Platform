@@ -51,7 +51,6 @@ function AdminDashboard() {
       value: overview.total_users || 0,
       icon: Users,
       color: 'from-blue-500 to-cyan-500',
-      change: '+12%',
       subtitle: `${overview.total_entrepreneurs || 0} Entrepreneurs, ${overview.total_investors || 0} Investors`
     },
     {
@@ -59,7 +58,6 @@ function AdminDashboard() {
       value: overview.active_campaigns || 0,
       icon: TrendingUp,
       color: 'from-purple-500 to-pink-500',
-      change: '+8%',
       subtitle: `${overview.total_campaigns || 0} Total Campaigns`
     },
     {
@@ -67,7 +65,6 @@ function AdminDashboard() {
       value: `$${(overview.total_funds_raised || 0).toLocaleString()}`,
       icon: DollarSign,
       color: 'from-green-500 to-emerald-500',
-      change: '+23%',
       subtitle: `${overview.total_pledges || 0} Total Pledges`
     },
     {
@@ -75,7 +72,6 @@ function AdminDashboard() {
       value: overview.today_activities || 0,
       icon: Activity,
       color: 'from-orange-500 to-red-500',
-      change: '+15%',
       subtitle: 'Activities Today'
     }
   ];
@@ -121,7 +117,7 @@ function AdminDashboard() {
                   <div className={`w-12 h-12 bg-primary-600 ${stat.color} rounded-xl flex items-center justify-center`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-green-400 text-sm font-semibold">{stat.change}</span>
+                  {stat.change && <span className="text-green-400 text-sm font-semibold">{stat.change}</span>}
                 </div>
                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
                 <div className="text-gray-400 text-sm mb-2">{stat.title}</div>

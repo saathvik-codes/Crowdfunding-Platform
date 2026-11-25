@@ -58,7 +58,7 @@ function LandingEnhanced() {
       .catch(() => setLive(null));
   }, []);
   const show = (n, money) => (live ? (money ? '$' : '') + Math.round(n).toLocaleString() : '-');
-  const stats = [
+  const stats = !live ? [] : [
     { value: show(live?.campaigns), label: 'Campaigns', icon: Rocket },
     { value: show(live?.raised, true), label: 'Pledged so far', icon: TrendingUp },
     { value: show(live?.backers), label: 'Backers', icon: Users },
@@ -245,7 +245,7 @@ function LandingEnhanced() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 border-y border-white/10">
+      {stats.length > 0 && <section className="py-16 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -273,7 +273,7 @@ function LandingEnhanced() {
             })}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* Role-Based Features */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
