@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
@@ -25,7 +26,7 @@ export default function Header() {
     <header className="sticky top-0 z-30 border-b border-line bg-paper/95">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-[family-name:var(--font-head)] text-xl font-bold text-brand-dark">
-          <span aria-hidden className="grid size-8 place-items-center rounded-lg bg-brand text-white">S</span>Seedling
+          <Image src="/icon-192.png" alt="" width={32} height={32} className="size-8 rounded-lg" priority />FundStarter
         </Link>
         <nav aria-label="Main" className="hidden flex-1 items-center gap-1 md:flex">
           {links.map((l) => (

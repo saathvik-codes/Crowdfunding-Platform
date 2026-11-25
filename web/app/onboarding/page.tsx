@@ -37,7 +37,7 @@ export default function Onboarding() {
       </div>
       {user.role !== "admin" && (
         <fieldset className="grid gap-2 sm:grid-cols-2">
-          <legend className="label">How will you use Seedling?</legend>
+          <legend className="label">How will you use FundStarter?</legend>
           {[["investor", "Back campaigns", "Browse, pledge and follow the ones you believe in."], ["entrepreneur", "Launch campaigns", "Raise money for your idea and post updates."]].map(([v, t, d]) => (
             <label key={v} className={`cursor-pointer rounded-xl border p-4 ${current === v ? "border-brand bg-brand-soft" : "border-line bg-white"}`}>
               <input type="radio" name="role" className="sr-only" checked={current === v} onChange={() => setRole(v)} />

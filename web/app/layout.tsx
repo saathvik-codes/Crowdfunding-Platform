@@ -9,9 +9,9 @@ const head = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-head" }
 const body = DM_Sans({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
-  title: { default: "Seedling - fund ideas that matter", template: "%s | Seedling" },
+  title: { default: "FundStarter - fund ideas that matter", template: "%s | FundStarter" },
   description: "Back campaigns, launch your own and follow every rupee from pledge to payout.",
-  icons: { icon: "/art/cf-icon.png" },
+  icons: { icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/favicon-32.png", type: "image/png", sizes: "32x32" }], apple: "/apple-touch-icon.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

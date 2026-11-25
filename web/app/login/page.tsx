@@ -27,7 +27,7 @@ export default function Login() {
   return (
     <div className="mx-auto grid min-h-[calc(100dvh-5rem)] max-w-4xl items-center gap-8 md:grid-cols-2">
       <form onSubmit={submit} className="card grid gap-4 p-6 sm:p-8">
-        <Link href="/" className="text-sm font-semibold text-brand-dark">&larr; Seedling</Link>
+        <Link href="/" className="text-sm font-semibold text-brand-dark">&larr; FundStarter</Link>
         <h1 className="text-3xl font-bold">Welcome back</h1>
         <div><label className="label" htmlFor="email">Email</label><input id="email" className="input" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></div>
         <div><label className="label" htmlFor="password">Password</label><input id="password" className="input" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} /></div>

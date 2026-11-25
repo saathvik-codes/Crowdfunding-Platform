@@ -26,7 +26,7 @@ export default function Register() {
   return (
     <div className="mx-auto grid min-h-[calc(100dvh-5rem)] max-w-4xl items-center gap-8 md:grid-cols-2">
       <form onSubmit={submit} className="card grid gap-4 p-6 sm:p-8">
-        <Link href="/" className="text-sm font-semibold text-brand-dark">&larr; Seedling</Link>
+        <Link href="/" className="text-sm font-semibold text-brand-dark">&larr; FundStarter</Link>
         <h1 className="text-3xl font-bold">Create your account</h1>
         <fieldset className="grid grid-cols-2 gap-2">
           <legend className="label">I want to</legend>
