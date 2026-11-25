@@ -69,10 +69,9 @@ export const walletAPI = {
 
 // Transactions API
 export const transactionsAPI = {
-  getByUser: (userId) => api.get(`/wallet/${userId}/transactions`),
-  getAll: () => api.get('/wallet/transactions'),
-  getStats: () => api.get('/wallet/transactions/stats'),
-  create: (transactionData) => api.post('/wallet/transactions', transactionData)
+  getByUser: (userId) => api.get(`/transactions/user/${userId}`),
+  getAll: () => api.get('/transactions/all'),
+  getStats: () => api.get('/transactions/stats')
 };
 
 // Users API

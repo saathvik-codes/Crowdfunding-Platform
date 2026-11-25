@@ -37,7 +37,8 @@ const PublicLayout = () => (
 );
 
 function App() {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     AOS.init({
@@ -64,8 +65,8 @@ function App() {
           <Route path="/create-campaign" element={<CreateCampaign />} />
           <Route path="/my-pledges" element={<MyPledges />} />
           <Route path="/wallet" element={<WalletDashboard />} />
-          <Route path="/users" element={<AdminManagement />} />
-          <Route path="/campaigns" element={<AdminManagement />} />
+          <Route path="/users" element={isAdmin ? <AdminManagement /> : <Navigate to="/" />} />
+          <Route path="/campaigns" element={isAdmin ? <AdminManagement /> : <Navigate to="/" />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
 

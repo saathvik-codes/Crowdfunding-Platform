@@ -53,6 +53,7 @@ app.use('/api/test', testDashboardRoutes);
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/users', require('./routes/users'));
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/pledges', pledgeRoutes);
 app.use('/api/transactions', transactionRoutes);

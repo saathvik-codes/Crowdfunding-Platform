@@ -57,15 +57,16 @@ function Sidebar() {
       entrepreneur: [
         { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
         { path: '/create-campaign', icon: Plus, label: 'Create Campaign' },
-        { path: '/my-campaigns', icon: TrendingUp, label: 'My Campaigns' },
         { path: '/analytics', icon: BarChart3, label: 'Analytics' },
         { path: '/wallet', icon: Wallet, label: 'My Wallet' },
+        { path: '/settings', icon: Settings, label: 'Settings' },
       ],
       investor: [
         { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
         { path: '/my-pledges', icon: Heart, label: 'My Pledges' },
         { path: '/wallet', icon: Wallet, label: 'My Wallet' },
         { path: '/analytics', icon: BarChart3, label: 'Analytics' },
+        { path: '/settings', icon: Settings, label: 'Settings' },
       ],
     };
 

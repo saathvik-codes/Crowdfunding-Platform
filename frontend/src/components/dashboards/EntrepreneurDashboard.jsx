@@ -79,7 +79,7 @@ function EntrepreneurDashboard() {
 
   const handleEditCampaign = (campaignId) => {
     // Navigate to the edit campaign page with the campaign ID
-    window.location.href = `/edit-campaign/${campaignId}`;
+    window.location.href = `/campaigns/${campaignId}`;
   };
 
   if (loading) {
@@ -240,7 +240,7 @@ function EntrepreneurDashboard() {
                           >
                             <Eye className="w-4 h-4" />
                           </motion.button>
-                          <Link to={`/edit-campaign/${campaign.id}`}>
+                          <Link to={`/campaigns/${campaign.id}`}>
                             <motion.button
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
@@ -429,7 +429,7 @@ function EntrepreneurDashboard() {
                   </motion.button>
                 </Link>
 
-                <Link to="/campaign-analytics" className="w-full">
+                <Link to="/analytics" className="w-full">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -440,14 +440,14 @@ function EntrepreneurDashboard() {
                   </motion.button>
                 </Link>
 
-                <Link to="/manage-backers" className="w-full">
+                <Link to="/my-pledges" className="w-full">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full p-3 bg-gray-800/50 text-white rounded-lg font-medium flex items-center justify-center space-x-2 border border-white/10 hover:border-blue-500/50 transition-colors"
                   >
                     <Users className="w-4 h-4" />
-                    <span>Manage Backers</span>
+                    <span>Pledges Made</span>
                   </motion.button>
                 </Link>
               </div>

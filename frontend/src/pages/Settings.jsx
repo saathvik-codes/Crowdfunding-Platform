@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Settings as SettingsIcon, User, Lock, Bell, Shield, Database, Save } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { usersAPI } from '../services/api';
+import { setUser } from '../store/authSlice';
 
 function Settings() {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [status, setStatus] = useState(null);
   const [activeTab, setActiveTab] = useState('profile');
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -28,10 +32,29 @@ function Settings() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (!user?.id) return;
+    usersAPI.getUser(user.id).then(({ data }) => {
+      const u = data.user || {};
+      setFormData((f) => ({ ...f, name: u.name || f.name, phone: u.phone || '', location: u.location || '', bio: u.bio || '' }));
+    }).catch(() => {});
+  }, [user?.id]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: API call to update settings
-    console.log('Saving settings:', formData);
+    setStatus(null);
+    if (formData.newPassword && formData.newPassword !== formData.confirmPassword) {
+      setStatus({ ok: false, text: 'New passwords do not match.' });
+      return;
+    }
+    try {
+      const { data } = await usersAPI.updateUser(user.id, formData);
+      dispatch(setUser({ name: data.user.name }));
+      setFormData((f) => ({ ...f, currentPassword: '', newPassword: '', confirmPassword: '' }));
+      setStatus({ ok: true, text: 'Changes saved.' });
+    } catch (err) {
+      setStatus({ ok: false, text: err.response?.data?.error || 'Could not save changes.' });
+    }
   };
 
   return (
@@ -274,6 +297,7 @@ function Settings() {
                   </div>
                 )}
 
+                {status && <p role="status" className={status.ok ? 'text-green-600 text-sm' : 'text-red-600 text-sm'}>{status.text}</p>}
                 {/* Save Button */}
                 <div className="mt-8 flex justify-end">
                   <motion.button
