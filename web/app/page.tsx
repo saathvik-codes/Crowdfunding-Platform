@@ -2,9 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { api, CATEGORIES, money, type Campaign } from "@/lib/api";
+import { api, CATEGORIES, money, pct, type Campaign } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
-import { CampaignCard, Empty } from "@/components/ui";
+import { CampaignCard, Empty, Progress } from "@/components/ui";
 
 type Sort = "newest" | "ending" | "funded" | "popular";
 
@@ -16,6 +16,8 @@ export default function Explore() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("all");
   const [sort, setSort] = useState<Sort>("newest");
+  const [onlySaved, setOnlySaved] = useState(false);
+  const [limit, setLimit] = useState(9);
 
   useEffect(() => {
     api<{ campaigns: Campaign[] }>("/campaigns", { auth: false }).then((r) => setAll(r.campaigns)).catch((e) => setError(e.message));
@@ -34,6 +36,7 @@ export default function Explore() {
   const shown = useMemo(() => {
     let list = (all || []).filter((c) => c.status === "active" || c.status === "successful");
     if (cat !== "all") list = list.filter((c) => (c.category || "other") === cat);
+    if (onlySaved) list = list.filter((c) => saved.includes(c.id));
     const needle = q.trim().toLowerCase();
     if (needle) list = list.filter((c) => `${c.title} ${c.summary || ""} ${c.description} ${c.creator_name || ""}`.toLowerCase().includes(needle));
     const by: Record<Sort, (a: Campaign, b: Campaign) => number> = {
@@ -43,7 +46,11 @@ export default function Explore() {
       popular: (a, b) => b.backers_count - a.backers_count,
     };
     return [...list].sort(by[sort]);
-  }, [all, q, cat, sort]);
+  }, [all, q, cat, sort, onlySaved, saved]);
+
+  const live = useMemo(() => (all || []).filter((c) => c.status === "active" && !c.is_expired), [all]);
+  const featured = useMemo(() => [...live].sort((a, b) => pct(b) - pct(a) || b.backers_count - a.backers_count)[0], [live]);
+  const endingSoon = useMemo(() => live.filter((c) => c.days_remaining <= 7 && c.id !== featured?.id).sort((a, b) => a.days_remaining - b.days_remaining).slice(0, 3), [live, featured]);
 
   const totals = useMemo(() => ({
     raised: (all || []).reduce((s, c) => s + Number(c.total_pledged || 0), 0),
@@ -78,6 +85,34 @@ export default function Explore() {
         <Image src="/art/cf-hero-seedling.webp" alt="A seedling growing from a coin" width={900} height={600} priority className="h-auto w-full rounded-2xl border border-line bg-white" />
       </section>
 
+      {featured && (
+        <section aria-label="Featured campaign" className="card grid overflow-hidden md:grid-cols-[1.1fr_1fr]">
+          <Link href={`/campaigns/${featured.id}`} className="block min-h-48 bg-brand-soft">
+            {featured.image_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={featured.image_url} alt="" className="size-full object-cover" />
+            ) : (
+              <Image src="/art/cf-carousel-back.webp" alt="" width={900} height={500} className="size-full object-cover" />
+            )}
+          </Link>
+          <div className="grid content-center gap-3 p-6">
+            <span className="chip w-fit">Most funded right now</span>
+            <Link href={`/campaigns/${featured.id}`} className="font-[family-name:var(--font-head)] text-2xl font-bold leading-snug hover:text-brand">{featured.title}</Link>
+            <p className="line-clamp-3 text-muted">{featured.summary || featured.description}</p>
+            <Progress value={pct(featured)} />
+            <p className="text-sm"><b>{money(featured.total_pledged)}</b> <span className="text-muted">of {money(featured.goal_amount)} · {featured.backers_count} backers · {featured.days_remaining} days left</span></p>
+            <Link href={`/campaigns/${featured.id}`} className="btn btn-primary w-fit">View campaign</Link>
+          </div>
+        </section>
+      )}
+
+      {endingSoon.length > 0 && (
+        <section aria-label="Ending soon" className="grid gap-3">
+          <h2 className="text-xl font-bold">Ending this week</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{endingSoon.map((c) => <CampaignCard key={c.id} c={c} saved={saved.includes(c.id)} onSave={toggleSave} />)}</div>
+        </section>
+      )}
+
       <section aria-label="Campaigns" className="grid gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <input className="input max-w-sm flex-1" type="search" placeholder="Search campaigns, creators…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search campaigns" />
@@ -86,6 +121,7 @@ export default function Explore() {
           </select>
         </div>
         <div className="flex flex-wrap gap-2" role="tablist" aria-label="Categories">
+          {user && <button aria-pressed={onlySaved} onClick={() => setOnlySaved((v) => !v)} className={`rounded-lg border px-3 py-1.5 text-sm font-semibold ${onlySaved ? "border-accent bg-accent text-white" : "border-line bg-white text-[#4b5a52] hover:border-[#c9c4b8]"}`}>Saved</button>}
           {["all", ...CATEGORIES].map((c) => (
             <button key={c} role="tab" aria-selected={cat === c} onClick={() => setCat(c)} className={`rounded-lg border px-3 py-1.5 text-sm font-semibold capitalize ${cat === c ? "border-brand bg-brand text-white" : "border-line bg-white text-[#4b5a52] hover:border-[#c9c4b8]"}`}>{c}</button>
           ))}
@@ -99,8 +135,11 @@ export default function Explore() {
           <Empty art="cf-empty-projects" title={all.length ? "Nothing matches your search" : "No campaigns yet"} text={all.length ? "Try a different category or clear the search." : "Be the first to launch one."} action={user?.role === "entrepreneur" ? <Link href="/campaigns/new" className="btn btn-primary mt-2">Start a campaign</Link> : undefined} />
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {shown.map((c) => <CampaignCard key={c.id} c={c} saved={saved.includes(c.id)} onSave={toggleSave} />)}
+            {shown.slice(0, limit).map((c) => <CampaignCard key={c.id} c={c} saved={saved.includes(c.id)} onSave={toggleSave} />)}
           </div>
+        )}
+        {shown.length > limit && (
+          <button className="btn btn-ghost justify-self-center" onClick={() => setLimit((n) => n + 9)}>Show more ({shown.length - limit} left)</button>
         )}
       </section>
 
