@@ -39,7 +39,7 @@ function Home() {
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-5xl font-bold mb-6"
+              className="text-3xl sm:text-5xl font-bold mb-6"
             >
               Projects looking for backers
             </motion.h1>
@@ -55,12 +55,12 @@ function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex justify-center space-x-4"
+              className="flex flex-wrap justify-center gap-3"
             >
-              <Link to="/register" className="text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-sm shadow-primary-500/30 bg-primary-600">
+              <Link to="/register" className="text-white px-6 sm:px-8 py-3 rounded-xl font-semibold transition-all shadow-sm shadow-primary-500/30 bg-primary-600">
                 Get Started
               </Link>
-              <Link to="/create-campaign" className="border-2 border-white/30 bg-white/10 text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all">
+              <Link to="/create-campaign" className="border-2 border-white/30 bg-white/10 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all">
                 Start a Campaign
               </Link>
             </motion.div>
@@ -126,7 +126,7 @@ function Home() {
             </div>
 
             {/* Filters */}
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setFilter('all')}
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${

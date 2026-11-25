@@ -21,7 +21,7 @@ import 'aos/dist/aos.css';
 const DashboardLayout = () => (
   <div className="min-h-screen flex bg-[#151915]">
     <Sidebar />
-    <main className="flex-1 lg:ml-64">
+    <main className="min-w-0 flex-1 lg:ml-64">
       <Outlet />
     </main>
   </div>

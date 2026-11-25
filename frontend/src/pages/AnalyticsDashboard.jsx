@@ -103,7 +103,7 @@ function AnalyticsDashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-white mb-2 flex items-center">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 flex items-center">
             <BarChart3 className="w-10 h-10 mr-3 text-primary-400" />
             Analytics Dashboard
           </h1>
@@ -213,7 +213,7 @@ function AnalyticsDashboard() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-600">
                     {successRates?.successful_count || 0}
@@ -323,7 +323,7 @@ function AnalyticsDashboard() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <div className="overflow-x-auto"><table className="w-full">
               <thead className="bg-white/5 border-b border-white/10">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase">Rank</th>
@@ -386,7 +386,7 @@ function AnalyticsDashboard() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></div>
           </div>
         </motion.div>
 
