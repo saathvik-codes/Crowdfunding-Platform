@@ -131,7 +131,7 @@ exports.getCampaignById = async (req, res, next) => {
 // Create new campaign
 exports.createCampaign = async (req, res, next) => {
   try {
-    const { title, description, goal_amount, deadline } = req.body;
+    const { title, description, goal_amount, deadline, category, image_url, summary } = req.body;
     const creator_id = req.user.userId;
 
     // Validate input
@@ -149,9 +149,9 @@ exports.createCampaign = async (req, res, next) => {
 
     // Insert campaign
     const result = await db.run(`
-      INSERT INTO campaigns (title, description, goal_amount, deadline, creator_id)
-      VALUES (?, ?, ?, ?, ?)
-    `, [title, description, goal_amount, deadline, creator_id]);
+      INSERT INTO campaigns (title, description, goal_amount, deadline, creator_id, category, image_url, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `, [title, description, goal_amount, deadline, creator_id, category || 'other', image_url || null, summary || null]);
 
     const campaign = await db.get('SELECT * FROM campaigns WHERE id = ?', [result.lastID]);
 
@@ -199,7 +199,7 @@ exports.getCampaignsByUser = async (req, res, next) => {
 exports.updateCampaign = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { title, description, goal_amount, deadline } = req.body;
+    const { title, description, goal_amount, deadline, category, image_url, summary } = req.body;
     const userId = req.user.userId;
 
     // Check if campaign exists and user is the creator
@@ -220,9 +220,9 @@ exports.updateCampaign = async (req, res, next) => {
     // Update campaign
     await db.run(`
       UPDATE campaigns 
-      SET title = ?, description = ?, goal_amount = ?, deadline = ?
+      SET title = ?, description = ?, goal_amount = ?, deadline = ?, category = COALESCE(?, category), image_url = COALESCE(?, image_url), summary = COALESCE(?, summary)
       WHERE id = ?
-    `, [title, description, goal_amount, deadline, id]);
+    `, [title, description, goal_amount, deadline, category || null, image_url || null, summary || null, id]);
 
     const updatedCampaign = await db.get('SELECT * FROM campaigns WHERE id = ?', [id]);
 

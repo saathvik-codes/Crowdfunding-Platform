@@ -34,6 +34,7 @@ const dbHelper = {
 
   // Execute a transaction
   transaction: (callback) => {
+    if (db.isMysql) return db.transaction(callback);
     return new Promise((resolve, reject) => {
       db.serialize(() => {
         db.run('BEGIN TRANSACTION', (err) => {

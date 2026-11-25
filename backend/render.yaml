@@ -11,3 +11,13 @@ services:
         value: 5000
       - key: JWT_SECRET
         generateValue: true
+      - key: TIDB_HOST
+        sync: false
+      - key: TIDB_PORT
+        value: 4000
+      - key: TIDB_USER
+        sync: false
+      - key: TIDB_PASSWORD
+        sync: false
+      - key: TIDB_DATABASE
+        value: crowdfunding

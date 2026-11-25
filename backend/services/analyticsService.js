@@ -80,7 +80,7 @@ class AnalyticsService {
           SELECT COUNT(*) as pledge_count 
           FROM pledges 
           GROUP BY user_id
-        )) as avg_pledges_per_user
+        ) per_user) as avg_pledges_per_user
       FROM pledges
     `);
   }

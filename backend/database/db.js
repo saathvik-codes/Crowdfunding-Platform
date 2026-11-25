@@ -1,3 +1,9 @@
+// Hosted deployments use TiDB (MySQL compatible); SQLite remains for offline local development.
+if (process.env.TIDB_HOST && process.env.TIDB_USER) {
+  module.exports = require('./mysql');
+  return;
+}
+
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
