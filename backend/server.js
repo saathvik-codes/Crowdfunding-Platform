@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'http://localhost:5173',
+    'http://localhost:3000',
     'https://crowdfunding-helper.netlify.app', // Your old Netlify deployment
     process.env.FRONTEND_URL // New Vercel URL from environment variables
   ],
@@ -49,8 +50,7 @@ app.get('/health', (req, res) => {
 });
 
 // Test Routes
-const testDashboardRoutes = require('./routes/testDashboard');
-app.use('/api/test', testDashboardRoutes);
+if (process.env.NODE_ENV !== 'production') app.use('/api/test', require('./routes/testDashboard'));
 
 // API Routes
 app.use('/api/auth', authRoutes);

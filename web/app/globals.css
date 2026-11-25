@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #f7f5f0;
+  --color-card: #ffffff;
+  --color-ink: #1d2b24;
+  --color-muted: #66736c;
+  --color-line: #e3dfd6;
+  --color-brand: #2d6a4f;
+  --color-brand-dark: #1f4d39;
+  --color-brand-soft: #e3f0e8;
+  --color-accent: #d9822b;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-head), system-ui, sans-serif;
+}
+
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body), system-ui, sans-serif; }
+h1, h2, h3 { font-family: var(--font-head), system-ui, sans-serif; letter-spacing: -0.015em; }
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+
+@layer components {
+  .btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-transparent px-4 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply bg-brand text-white hover:bg-brand-dark; }
+  .btn-ghost { @apply border-line bg-white text-ink hover:border-[#c9c4b8]; }
+  .btn-danger { @apply border-red-200 bg-white text-red-700 hover:bg-red-50; }
+  .card { @apply rounded-2xl border border-line bg-card; }
+  .input { @apply min-h-11 w-full rounded-xl border border-[#cfcabd] bg-white px-3 text-sm placeholder:text-[#9aa39e] focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20; }
+  textarea.input { @apply py-2.5; }
+  .label { @apply mb-1.5 block text-sm font-semibold text-[#3c4a43]; }
+  .chip { @apply inline-flex items-center rounded-lg bg-brand-soft px-2.5 py-1 text-xs font-semibold capitalize text-brand-dark; }
+}

@@ -108,6 +108,7 @@ exports.createPledge = async (req, res, next) => {
 exports.getPledgesByUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
+    if (req.user.role !== 'admin' && String(req.user.userId) !== String(userId)) return res.status(403).json({ error: 'Not allowed' });
 
     const pledges = await db.all(`
       SELECT 
@@ -122,17 +123,15 @@ exports.getPledgesByUser = async (req, res, next) => {
         c.goal_amount,
         c.current_funds as total_pledged,
         c.deadline,
-        wt.status as transaction_status,
-        wt.timestamp as processed_at,
+        p.status as transaction_status,
+        p.timestamp as processed_at,
         (c.current_funds * 100.0 / c.goal_amount) as funding_percentage
       FROM pledges p
       LEFT JOIN campaigns c ON p.campaign_id = c.id
-      LEFT JOIN wallet_transactions wt ON p.id = wt.reference_id AND wt.reference_type = 'pledge'
       WHERE p.user_id = ?
       ORDER BY p.timestamp DESC
     `, [userId]);
 
-    console.log('Pledges for user', userId, ':', JSON.stringify(pledges, null, 2));
 
     // Ensure we always return an array, even if empty
     res.json({ pledges: pledges || [] });
@@ -170,6 +169,7 @@ exports.getPledgesByCampaign = async (req, res, next) => {
 exports.getUserPledgeStats = async (req, res, next) => {
   try {
     const { userId } = req.params;
+    if (req.user.role !== 'admin' && String(req.user.userId) !== String(userId)) return res.status(403).json({ error: 'Not allowed' });
 
     // First, get the basic pledge stats
     const stats = await db.get(`

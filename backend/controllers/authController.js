@@ -5,7 +5,7 @@ const db = require('../database/dbHelper');
 // Register new user with role
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, role = 'investor', wallet_balance = 1000 } = req.body;
+    const { name, email, password, role = 'investor' } = req.body;
     console.log('Registration attempt for:', { email, name, role });
 
     // Validate input
@@ -15,9 +15,10 @@ exports.register = async (req, res, next) => {
     }
 
     // Validate role
-    const validRoles = ['admin', 'entrepreneur', 'investor'];
+    // admins are created by other admins, never through public sign-up
+    const validRoles = ['entrepreneur', 'investor'];
     if (!validRoles.includes(role)) {
-      return res.status(400).json({ error: 'Invalid role. Must be admin, entrepreneur, or investor' });
+      return res.status(400).json({ error: 'Choose entrepreneur or investor' });
     }
 
     // Check if user already exists
@@ -34,8 +35,8 @@ exports.register = async (req, res, next) => {
     // Insert user with role
     console.log('Inserting new user with role:', role);
     const result = await db.run(
-      'INSERT INTO users (name, email, password, role, wallet_balance) VALUES (?, ?, ?, ?, ?)',
-      [name, email, hashedPassword, role, wallet_balance]
+      'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+      [name, email, hashedPassword, role]
     );
 
     const userId = result.lastID;
@@ -62,7 +63,7 @@ exports.register = async (req, res, next) => {
         name,
         email,
         role,
-        wallet_balance
+        wallet_balance: (await db.get('SELECT wallet_balance FROM users WHERE id = ?', [userId])).wallet_balance
       }
     });
   } catch (error) {
@@ -146,7 +147,7 @@ exports.login = async (req, res, next) => {
 exports.getCurrentUser = async (req, res, next) => {
   try {
     const user = await db.get(
-      'SELECT id, name, email, role, wallet_balance, is_verified, profile_image, bio, phone, location, created_at FROM users WHERE id = ?',
+      'SELECT id, name, email, role, wallet_balance, is_verified, onboarded, interests, profile_image, bio, phone, location, created_at FROM users WHERE id = ?',
       [req.user.userId]
     );
 

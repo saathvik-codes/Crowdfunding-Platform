@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const adminOnly = require('../middleware/admin');
 const auth = require('../middleware/auth');
 const AnalyticsService = require('../services/analyticsService');
 
@@ -15,7 +16,7 @@ router.get('/top-campaigns', async (req, res, next) => {
 });
 
 // Get failed campaigns
-router.get('/failed-campaigns', async (req, res, next) => {
+router.get('/failed-campaigns', adminOnly, async (req, res, next) => {
   try {
     const campaigns = await AnalyticsService.getFailedCampaigns();
     res.json({ campaigns });
@@ -99,7 +100,7 @@ router.get('/wallet/:userId', auth, async (req, res, next) => {
 });
 
 // Get audit report
-router.get('/audit-log', auth, async (req, res, next) => {
+router.get('/audit-log', adminOnly, async (req, res, next) => {
   try {
     const { table, days } = req.query;
     const report = await AnalyticsService.getAuditReport(

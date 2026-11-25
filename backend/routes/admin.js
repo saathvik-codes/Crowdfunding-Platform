@@ -1,103 +1,61 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database/dbHelper');
-const bcrypt = require('bcryptjs');
+const adminOnly = require('../middleware/admin');
 
-// Get all users (for debugging)
-router.get('/users', async (req, res) => {
+router.use(adminOnly);
+
+router.get('/users', async (req, res, next) => {
   try {
-    const users = await db.all(
-      'SELECT id, name, email, role, wallet_balance, is_verified, is_active, created_at FROM users ORDER BY created_at DESC'
-    );
-    res.json({
-      count: users.length,
-      users
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    const users = await db.all('SELECT id, name, email, role, wallet_balance, is_verified, is_active, created_at FROM users ORDER BY created_at DESC LIMIT 500');
+    res.json({ count: users.length, users });
+  } catch (e) { next(e); }
 });
 
-// Get all pledges
-router.get('/pledges', async (req, res) => {
+// Change a user's role or switch the account on/off
+router.patch('/users/:id', async (req, res, next) => {
   try {
-    const pledges = await db.all(`
-      SELECT 
-        p.*,
-        u.name as user_name,
-        u.email as user_email,
-        c.title as campaign_title
-      FROM pledges p
-      LEFT JOIN users u ON p.user_id = u.id
-      LEFT JOIN campaigns c ON p.campaign_id = c.id
-      ORDER BY p.timestamp DESC
-    `);
-    res.json({
-      count: pledges.length,
-      pledges
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    const { role, is_active } = req.body || {};
+    if (String(req.params.id) === String(req.user.userId)) return res.status(400).json({ error: 'You cannot change your own account here' });
+    if (role !== undefined && !['admin', 'entrepreneur', 'investor'].includes(role)) return res.status(400).json({ error: 'Unknown role' });
+    const user = await db.get('SELECT id FROM users WHERE id = ?', [req.params.id]);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (role !== undefined) await db.run('UPDATE users SET role = ? WHERE id = ?', [role, user.id]);
+    if (is_active !== undefined) await db.run('UPDATE users SET is_active = ? WHERE id = ?', [is_active ? 1 : 0, user.id]);
+    res.json({ user: await db.get('SELECT id, name, email, role, is_active FROM users WHERE id = ?', [user.id]) });
+  } catch (e) { next(e); }
 });
 
-// Get all campaigns
-router.get('/campaigns', async (req, res) => {
+router.get('/pledges', async (req, res, next) => {
   try {
-    const campaigns = await db.all(
-      'SELECT * FROM campaigns ORDER BY created_at DESC'
-    );
-    res.json({
-      count: campaigns.length,
-      campaigns
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    const pledges = await db.all(`SELECT p.*, u.name AS user_name, u.email AS user_email, c.title AS campaign_title
+      FROM pledges p LEFT JOIN users u ON p.user_id = u.id LEFT JOIN campaigns c ON p.campaign_id = c.id ORDER BY p.timestamp DESC LIMIT 500`);
+    res.json({ count: pledges.length, pledges });
+  } catch (e) { next(e); }
 });
 
-// Seed test user
-router.post('/seed-user', async (req, res) => {
+router.get('/campaigns', async (req, res, next) => {
   try {
-    const hashedPassword = await bcrypt.hash('password123', 10);
-    
-    const result = await db.run(
-      `INSERT INTO users (name, email, password, wallet_balance) 
-       VALUES (?, ?, ?, ?)`,
-      ['Saathvik', 'saathvikk202@gmail.com', hashedPassword, 10000.00]
-    );
-
-    res.json({
-      message: 'Test user created successfully',
-      userId: result.lastID,
-      credentials: {
-        email: 'saathvikk202@gmail.com',
-        password: 'password123'
-      }
-    });
-  } catch (error) {
-    if (error.message.includes('UNIQUE constraint')) {
-      res.status(400).json({ error: 'User already exists' });
-    } else {
-      res.status(500).json({ error: error.message });
-    }
-  }
+    const campaigns = await db.all(`SELECT c.*, u.name AS creator_name FROM campaigns c LEFT JOIN users u ON u.id = c.creator_id ORDER BY c.created_at DESC LIMIT 500`);
+    res.json({ count: campaigns.length, campaigns });
+  } catch (e) { next(e); }
 });
 
-// Database stats
-router.get('/stats', async (req, res) => {
+// Take a campaign down (status only; refunds follow the normal deadline process)
+router.patch('/campaigns/:id', async (req, res, next) => {
   try {
-    const stats = await db.get(`
-      SELECT 
-        (SELECT COUNT(*) FROM users) as total_users,
-        (SELECT COUNT(*) FROM campaigns) as total_campaigns,
-        (SELECT COUNT(*) FROM pledges) as total_pledges,
-        (SELECT COALESCE(SUM(wallet_balance), 0) FROM users) as total_wallet_balance
-    `);
-    res.json(stats);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    const { status } = req.body || {};
+    if (!['active', 'cancelled'].includes(status)) return res.status(400).json({ error: 'Status must be active or cancelled' });
+    await db.run('UPDATE campaigns SET status = ? WHERE id = ?', [status, req.params.id]);
+    res.json({ campaign: await db.get('SELECT id, title, status FROM campaigns WHERE id = ?', [req.params.id]) });
+  } catch (e) { next(e); }
+});
+
+router.get('/stats', async (req, res, next) => {
+  try {
+    res.json(await db.get(`SELECT (SELECT COUNT(*) FROM users) AS total_users, (SELECT COUNT(*) FROM campaigns) AS total_campaigns,
+      (SELECT COUNT(*) FROM pledges) AS total_pledges, (SELECT COALESCE(SUM(wallet_balance), 0) FROM users) AS total_wallet_balance`));
+  } catch (e) { next(e); }
 });
 
 module.exports = router;
